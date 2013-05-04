@@ -1,0 +1,16 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html lang="zh">
+<head>
+    <title>话题</title>
+</head>
+<body>
+    <h1>新建话题</h1>
+    <form action="." method="POST">
+        {% csrf_token %}
+        <table>
+            {{ form.as_table }}
+        </table>
+    <p><input type="submit" value="提交"/></p>
+    </form>
+</body>
+</html>

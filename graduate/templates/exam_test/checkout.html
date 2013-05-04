@@ -1,0 +1,162 @@
+<html>
+<body>
+<form name="input" action="" method="get">
+{% if sucess %}
+<li><a href="/exam_test/checkout"><span>重新开始</span></a></li>
+<li><a href="{% url recommend_article %}"><span>继续阅读</span></a></li>
+<li><a href="{% url user_rate_list %}"><span>查看测试记录</span></a></li>
+<h2>得分{{ rate }}<h2/>
+<br />
+问题1：
+{{ all_questions.0.question }}
+<br />
+A:
+{{ all_questions.0.answer_a }}
+<br />
+B:
+{{ all_questions.0.answer_b }}
+<br />
+C:
+{{ all_questions.0.answer_c }}
+<br />
+D:
+{{ all_questions.0.answer_d }}
+<br />
+你的答案：
+{{ all_questions.0.answer }}
+<br />
+正确答案：
+{{ all_questions.0.answer_is_right }}
+<br />
+<br />
+问题2：
+{{ all_questions.1.question }}
+<br />
+A:
+{{ all_questions.1.answer_a }}
+<br />
+B:
+{{ all_questions.1.answer_b }}
+<br />
+C:
+{{ all_questions.1.answer_c }}
+<br />
+D:
+{{ all_questions.1.answer_d }}
+<br />
+你的答案：
+{{ all_questions.1.answer }}
+<br />
+正确答案：
+{{ all_questions.1.answer_is_right }}
+<br />
+
+
+<br />
+问题3：
+{{ all_questions.2.question }}
+<br />
+A:
+{{ all_questions.2.answer_a }}
+<br />
+B:
+{{ all_questions.2.answer_b }}
+<br />
+C:
+{{ all_questions.2.answer_c }}
+<br />
+D:
+{{ all_questions.2.answer_d }}
+<br />
+你的答案：
+{{ all_questions.2.answer }}
+<br />
+正确答案：
+{{ all_questions.2.answer_is_right }}
+<br />
+
+
+<br />
+问题4：
+{{ all_questions.3.question }}
+<br />
+A:
+{{ all_questions.3.answer_a }}
+<br />
+B:
+{{ all_questions.3.answer_b }}
+<br />
+C:
+{{ all_questions.3.answer_c }}
+<br />
+D:
+{{ all_questions.3.answer_d }}
+<br />
+你的答案：
+{{ all_questions.3.answer }}
+<br />
+正确答案：
+{{ all_questions.3.answer_is_right }}
+<br />
+
+
+<br />
+问题5：
+{{ all_questions.4.question }}
+<br />
+A:
+{{ all_questions.4.answer_a }}
+<br />
+B:
+{{ all_questions.4.answer_b }}
+<br />
+C:
+{{ all_questions.4.answer_c }}
+<br />
+D:
+{{ all_questions.4.answer_d }}
+<br />
+你的答案：
+{{ all_questions.4.answer }}
+<br />
+正确答案：
+{{ all_questions.4.answer_is_right }}
+<br />
+
+
+{% else %} 
+<h2>这是第{{ num_question }}个问题</h2>
+{{ question }}
+<br />
+A:
+{{ answer_a }}
+<input type="radio"  name="answer" value="A" />
+<br />
+B:
+{{ answer_b }}
+<input type="radio" name="answer" value="B" />
+<br />
+C:
+{{ answer_c }}
+<input type="radio" name="answer" value="C" />
+<br />
+D:
+{{ answer_d }}
+<input type="radio" name="answer" value="D" />
+<br />
+<input type="submit" value="Submit" />
+</form>
+{% comment %}
+{% if error %}
+<h2>选择正确</h2>
+{% else %}
+<h2>正确答案是:</h2>
+<br/>
+{% endif %}
+{% endcomment %}
+你好：{{ username }}
+{% endif %}
+</body>
+</html>
+
+

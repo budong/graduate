@@ -1,0 +1,25 @@
+<html>
+<body>
+<h2>所有问题</h2>
+
+    {% if object_list %}
+        <ul>
+        {% for question in object_list %}
+            <li><a href="{{ question.get_absolute_url }}">{{ question.title }}</a></li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>暂无问题</p>
+    {% endif %}
+
+    <p>
+    {% if page_obj.has_previous %}
+        <a href="?page={{ page_obj.previous_page_number }}">上一页</a>
+    {% endif %}
+    {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+    {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}">下一页</a>
+    {% endif %}
+    </p>
+</body>
+</html>

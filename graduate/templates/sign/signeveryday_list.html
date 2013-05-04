@@ -1,0 +1,26 @@
+<html>
+<body>
+<h2>签到记录</h2>
+
+    {% if object_list %}
+        <ul>
+        {% for sign in object_list %}
+            <li><a href="{{ sign.get_absolute_url }}">{{ sign.mood }}</a></li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>没有签到记录</p>
+    {% endif %}
+
+    <p>
+    {% if page_obj.has_previous %}
+        <a href="?page={{ page_obj.previous_page_number }}">上一页</a>
+    {% endif %}
+    {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+    {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}">下一页</a>
+    {% endif %}
+    </p>
+</p><li><a href="{% url recommend_article %}"><span>继续阅读</span></a><li><p>
+</body>
+</html>

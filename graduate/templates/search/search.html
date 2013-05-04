@@ -1,0 +1,35 @@
+{% comment %}
+{% extends 'base.html' %}
+{% endcomment %}
+
+{% block title %}Search{% endblock %}
+
+{% block content %}
+<h2>谷歌搜索</h2>
+
+<form action="http://www.google.com/search" method="get">    
+    <input name="ie" value="UTF-8" type="hidden" />    
+    <input size="30" name="q"  type="text"/>    
+    <input name="Search" value="Search" type="submit" />    
+</form>   
+
+<h2>本站搜索</h2>
+<form method="get" action=".">
+  <table>
+  {{ form.as_table }}
+  <tr>
+      <td>&nbsp;</td>
+      <td><input type="submit" value="Search"></td>
+    </tr>
+  </table>
+
+{% if query %}
+<h3>Results</h3>
+{% for result in page.object_list %}
+<p><a href="{{ result.object.get_absolute_url }}">{{ result.object.title }}</a></p>
+{% empty %}
+<p>No results found.</p>
+{% endfor %}
+{% endif %}
+</form>
+{% endblock %}
