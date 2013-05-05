@@ -142,7 +142,7 @@ INSTALLED_APPS = (
     'exam_test',
     'aiteo',
     'graduate.accounts',
-    'voting'
+    'voting',
 )
 
 # A sample logging configuration. The only tangible logging
