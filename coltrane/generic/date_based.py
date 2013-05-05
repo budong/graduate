@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import datetime
 import time
 
@@ -11,6 +12,10 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.models import User
 from graduate.accounts.models import MyProfile
+
+import sys
+reload( sys )
+sys.setdefaultencoding('utf-8')
 
 import warnings
 warnings.warn(
@@ -319,7 +324,7 @@ def archive_today(request, **kwargs):
     return archive_day(request, **kwargs)
 
 
-#@login_required
+@login_required
 def object_detail(request, year, month, day, queryset, date_field,
         month_format='%b', day_format='%d', object_id=None, slug=None,
         slug_field='slug', template_name=None, template_name_field=None,
@@ -363,9 +368,9 @@ def object_detail(request, year, month, day, queryset, date_field,
     except ObjectDoesNotExist:
         raise Http404("No %s found for" % model._meta.verbose_name)
 
-    #when user reading the article,increase the user's tag num refer to the article's tag.
-    user_object = get_object_or_404(User, username=request.user)
-    userena_object = get_object_or_404(MyProfile, user=user_object.id)
+    #根据用户的浏览记录，相应的标签记录数加 1
+    django_user_object = get_object_or_404(User, username=request.user)
+    userena_object = get_object_or_404(MyProfile, user=django_user_object.id)
     if obj.categories.title == 'network':
         userena_object.increase_network_num()
     elif obj.categories.title == 'system':
