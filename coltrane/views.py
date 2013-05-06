@@ -14,7 +14,7 @@ sys.setdefaultencoding('utf-8')
 
 def category_detail(request, slug):
     category = get_object_or_404(Category, slug=slug)
-    return object_list(request, queryset=category.live_entry_set(), extra_context={
+    return object_list(request, queryset=category.live_entry_set(),paginate_by=8, extra_context={
         'category': category
     })
 
@@ -42,5 +42,5 @@ def recommend_article(request):
     category_object = Category.objects.get(title=category)
     queryset = category_object.live_entry_set()
     #解析
-    return object_list(request,queryset)
+    return object_list(request,queryset,paginate_by=8)
     

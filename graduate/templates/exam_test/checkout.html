@@ -1,5 +1,5 @@
-<html>
-<body>
+{% extends "common/base.html"%}
+{% block content%}
 <form name="input" action="" method="get">
 {% if sucess %}
 <li><a href="/exam_test/checkout"><span>重新开始</span></a></li>
@@ -125,26 +125,45 @@ D:
 
 
 {% else %} 
-<h2>这是第{{ num_question }}个问题</h2>
-{{ question }}
-<br />
-A:
-{{ answer_a }}
+<div class="row">
+<h3>{{ num_question }}:{{ question }}</h3>
+<table class="table table-hover">
+<tr>
+<td>
 <input type="radio"  name="answer" value="A" />
-<br />
-B:
-{{ answer_b }}
+</td>
+<td>
+{{ answer_a }}
+</td>
+</tr>
+<tr>
+<td>
+
 <input type="radio" name="answer" value="B" />
-<br />
-C:
-{{ answer_c }}
+</td>
+<td>
+{{ answer_b }}
+</td>
+</tr>
+<tr>
+<td>
 <input type="radio" name="answer" value="C" />
-<br />
-D:
-{{ answer_d }}
+</td>
+<td>
+{{ answer_c }}
+</td>
+</tr>
+<tr>
+<td>
 <input type="radio" name="answer" value="D" />
-<br />
-<input type="submit" value="Submit" />
+</td>
+<td>
+{{ answer_d }}
+</td>
+</tr>
+</table>
+<input type="submit" value="提交" />
+</div><!---/.row--->
 </form>
 {% comment %}
 {% if error %}
@@ -156,7 +175,6 @@ D:
 {% endcomment %}
 你好：{{ username }}
 {% endif %}
-</body>
-</html>
+{%endblock %}
 
 

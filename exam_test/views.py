@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.views.generic import list_detail
 from exam_test.models import QuestionAnswer,UserExam,get_one_question
+from django.template import RequestContext
 
 @login_required
 def exam_detail(request,slug):
@@ -45,7 +46,7 @@ def checkout(request):
         if 'answer' in request.GET:
             answer = request.GET['answer']
             request.session['qa'][request.session["num"]-1]['answer'] = answer
-            if answer == request.session['qa'][request.session["num"]-1]['answer']:
+            if request.session['qa'][request.session["num"]-1]['answer_is_right'] == request.session['qa'][request.session["num"]-1]['answer']:
                 request.session["right"] += 1
          
         #本次测试的问题字典，及结果
@@ -61,7 +62,7 @@ def checkout(request):
         del request.session["right"]
         del request.session["qa"]
         del request.session["num"]
-        return render_to_response('exam_test/checkout.html',{'sucess': sucess,'rate': rate,'all_questions': all_questions})
+        return render_to_response('exam_test/checkout.html',{'sucess': sucess,'rate': rate,'all_questions': all_questions},context_instance=RequestContext(request))
 
     #对提交的问题进行验证，将结果存入session
     if request.method == 'GET':
@@ -75,7 +76,7 @@ def checkout(request):
         if 'answer' in request.GET:
             answer = request.GET['answer']
             request.session['qa'][request.session["num"]-1]['answer'] = answer
-            if answer == request.session['qa'][request.session["num"]-1]['answer']:
+            if request.session['qa'][request.session["num"]-1]['answer_is_right'] == request.session['qa'][request.session["num"]-1]['answer']:
                 request.session["right"] += 1
         request.session["num"] += 1
 
@@ -86,5 +87,5 @@ def checkout(request):
     answer_c = question_dic['answer_c']
     answer_d = question_dic['answer_d']
 
-    return render_to_response('exam_test/checkout.html',{'username': request.user,'num_question': request.session["num"],'question': question,'answer_a': answer_a,'answer_b': answer_b,'answer_c': answer_c,'answer_d': answer_d})
+    return render_to_response('exam_test/checkout.html',{'username': request.user,'num_question': request.session["num"],'question': question,'answer_a': answer_a,'answer_b': answer_b,'answer_c': answer_c,'answer_d': answer_d},context_instance=RequestContext(request))
     

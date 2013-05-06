@@ -1,34 +1,31 @@
-{% comment %}
-{% extends 'base.html' %}
-{% endcomment %}
+{% extends "common/base.html" %}
 
 {% block title %}Search{% endblock %}
 
 {% block content %}
-<h2>谷歌搜索</h2>
-
-<form action="http://www.google.com/search" method="get">    
+<h2>Google Search</h2>
+<form action="http://www.google.com/search" method="get" class="form-search">    
     <input name="ie" value="UTF-8" type="hidden" />    
-    <input size="30" name="q"  type="text"/>    
-    <input name="Search" value="Search" type="submit" />    
+    <input  name="q" class="input-large"  type="text"/>    
+    <input name="Search" value="Search" class="btn" type="submit" />    
 </form>   
-
-<h2>本站搜索</h2>
+<hr />
+<h2>站内搜索</h2>
 <form method="get" action=".">
   <table>
   {{ form.as_table }}
   <tr>
       <td>&nbsp;</td>
-      <td><input type="submit" value="Search"></td>
+      <td><input type="submit" class="btn" value="Search"></td>
     </tr>
   </table>
-
+<hr />
 {% if query %}
-<h3>Results</h3>
+<h3>搜索结果</h3>
 {% for result in page.object_list %}
 <p><a href="{{ result.object.get_absolute_url }}">{{ result.object.title }}</a></p>
 {% empty %}
-<p>No results found.</p>
+<p>没有结果，换个关键字试试？</p>
 {% endfor %}
 {% endif %}
 </form>

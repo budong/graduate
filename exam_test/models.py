@@ -1,17 +1,22 @@
+# -*- coding: utf-8 -*-
 import datetime
 import random
 from django.db import models
 from django.contrib.auth.models import User
 
+import sys
+reload( sys )
+sys.setdefaultencoding('utf-8')
+
 # Create your models here.
 class QuestionAnswer(models.Model):
-    title = models.CharField(max_length=255,unique=True,help_text="Maximum 255 characters.")
-    slug = models.SlugField(unique=True,help_text="Suggested value automatically generated from title. Must be unique.")
-    is_right = models.CharField(max_length=255)
-    a = models.CharField(max_length=1024)
-    b = models.CharField(max_length=1024)
-    c = models.CharField(max_length=1024)
-    d = models.CharField(max_length=1024)
+    title = models.CharField(max_length=1024,help_text="Maximum 1024 characters.",verbose_name="标题")
+    slug = models.SlugField(unique=True,help_text="唯一")
+    is_right = models.CharField(max_length=255,verbose_name="正确答案")
+    A = models.CharField(max_length=102)
+    B = models.CharField(max_length=1024)
+    C = models.CharField(max_length=1024)
+    D = models.CharField(max_length=1024)
     
     def __unicode__(self):
         return self.title
@@ -37,10 +42,10 @@ def get_one_question():
     question = random.choice(questions)
     dic = {}
     dic['title'] = question.title
-    dic['answer_a'] = question.a
-    dic['answer_b'] = question.b
-    dic['answer_c'] = question.c
-    dic['answer_d'] = question.d
+    dic['answer_a'] = question.A
+    dic['answer_b'] = question.B
+    dic['answer_c'] = question.C
+    dic['answer_d'] = question.D
     dic['answer_is_right'] = question.is_right
     return dic
 

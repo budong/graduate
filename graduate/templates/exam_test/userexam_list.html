@@ -5,7 +5,8 @@
     {% if object_list %}
         <ul>
         {% for userexam in object_list %}
-            <li><a href="{{ userexam.get_absolute_url }}">{{ userexam.pub_date }} {{ userexam.rate }}</a></li>
+            <p>{{ forloop.counter }}: </p>
+            <li>{{ userexam.pub_date }} {{ userexam.rate }}</li>
         {% endfor %}
         </ul>
     {% else %}

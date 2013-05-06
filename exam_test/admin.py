@@ -2,7 +2,7 @@ from django.contrib import admin
 from exam_test.models import QuestionAnswer,UserExam
 
 class QuestionAnswerAdmin(admin.ModelAdmin):
-    list_display = ('title','slug','is_right','a','b','c','d')
+    list_display = ('title','slug','is_right','A','B','C','D')
 admin.site.register(QuestionAnswer, QuestionAnswerAdmin)
 
 

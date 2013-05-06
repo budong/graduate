@@ -1,25 +1,61 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
-<html lang="zh">
-<head>
-    <title>回应</title>
-<script type="text/javascript"
-    src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js">
-</script>
-<script type="text/javascript">
-    $(document).ready(function() {
+{%extends "common/base.html"%}
+{% block content%}
+<h1>回应</h1>
+    <a href="{% url aiteo_question_list %}" class="btn">所有话题</a>
+    <a href="{% url aiteo_question_create %}" class="btn btn-primary">新建话题</a>
+<hr />    
+<form action="." method="POST">
+<div class="well">
+ {% csrf_token %}
+       <p class="lead">{{ question.question }}  <span id="{{question.id}}">>
 
+<a class="btn btn-danger buttondown pull-right" href="#" data-toggle="tooltip"  data-original-title="{{ question.vote_down_count }}"><i class="icon-thumbs-down"></i></a>
+ <a class="btn  buttonup pull-right" href="#" data-toggle="tooltip"  data-original-title="{{ question.vote_up_count }}"><i class="icon-thumbs-up"></i></a>
+</span> </p>
+<hr />
+       <p> {{ question.content }}</p>
+</div>  
+<table class="table table-hover ">      
+
+        {% for response in responses.all %}
+<tr><td>
+       <strong> {{forloop.counter}}</strong> : By {{response.user}} 
+        </td>
+       <td> {{ response }} </td>
+ <td id="{{question.id}}_{{response.id}}">
+<a class="btn btn-danger rbuttondown pull-right" href="#" data-toggle="tooltip"  data-original-title=" {{ response.vote_down_count }}"><i class="icon-thumbs-down"></i></a>
+ <a class="btn  rbuttonup pull-right" href="#" data-toggle="tooltip"  data-original-title=" {{ response.vote_up_count }}"><i class="icon-thumbs-up"></i></a>
+          </td>      
+</tr>
+        {% endfor %}
+</table>
+        <table>
+            {{ add_response_form.as_table }}
+        </table>
+    <p><input class="btn btn-primary" type="submit" value="提交"/></p>
+    </form>
+    {%endblock%}
+    {% block scripts%}
+<script src=""></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+	$('.buttonup').tooltip();
+	$('.buttondown').tooltip();
             $('.buttondown').click(function () {
-                var thisobject = $(this);
+                var thisobject = $(this).parent();
                 var id = thisobject.attr("id");
-                var completeurl = "../vote-question/" + id  + "_" + id + "/downvote/";
+                var completeurl = "/forum/question/vote-question/" + id + "_" + id + "/downvote/";
                 $.ajax({
-                    type: "POST",
+                    type: "GET",
                     url: completeurl,
                     data: "amit",
                     success: function ( response ) {
                         response = $.trim( response );
                         $.ajaxSetup({ cache: false});
-                        $(".questd#"+id+"d").html(response);
+                        $("#"+id).children(".buttondown").attr("data-original-title",response);
+                         $("#"+id).children('.buttondown').tooltip('destroy');
+                         $("#"+id).children('.buttondown').tooltip();
+                        $("#"+id).children('.buttondown').tooltip('show');
                         }
                     }); 
                 return false;
@@ -28,95 +64,72 @@
 
             
             $('.buttonup').click(function () {
-                var thisobject = $(this);
+                var thisobject = $(this).parent();
                 var id = thisobject.attr("id");
-                var completeurl = "../vote-question/" + id  + "_" + id + "/upvote/";
+                var completeurl = "/forum/question/vote-question/" + id + "_" + id + "/upvote/";
                 $.ajax({
-                    type: "POST",
+                    type: "GET",
                     url: completeurl,
                     data: "amit",
                     success: function ( response ) {
                         response = $.trim( response );
                         $.ajaxSetup({ cache: false});
-                        $(".questu#"+id).html(response);
+                        $("#"+id).children(".buttonup").attr("data-original-title",response);
+			 $("#"+id).children('.buttonup').tooltip('destroy');
+			 $("#"+id).children('.buttonup').tooltip();
+			$("#"+id).children('.buttonup').tooltip('show');
                         }
                     }); 
                 return false;
-                });
+                });    
 
+	$('.rbuttonup').tooltip();
+	$('.rbuttondown').tooltip();
             $('.rbuttondown').click(function () {
-                var thisobject = $(this);
+                var thisobject = $(this).parent();
                 var id = thisobject.attr("id");
                 var completeurl = "../vote-response/" + id + "/downvote/";
                 $.ajax({
-                    type: "POST",
+                    type: "GET",
                     url: completeurl,
                     data: "amit",
                     success: function ( response ) {
                         response = $.trim( response );
                         $.ajaxSetup({ cache: false});
-                        $(".responsed#"+id+"rd").html(response);
+                        $("#"+id).children(".rbuttondown").attr("data-original-title",response);
+                         $("#"+id).children('.rbuttondown').tooltip('destroy');
+                         $("#"+id).children('.rbuttondown').tooltip();
+                        $("#"+id).children('.rbuttondown').tooltip('show');
                         }
-                    }); 
+         }); 
                 return false;
                 });
 
 
             
             $('.rbuttonup').click(function () {
-                var thisobject = $(this);
+                var thisobject = $(this).parent();
                 var id = thisobject.attr("id");
-                var completeurl = "../vote-response/" + id + "/upvote/";
+                var completeurl = "../vote-response/" + id + "/downvote/";
                 $.ajax({
-                    type: "POST",
+                    type: "GET",
                     url: completeurl,
                     data: "amit",
                     success: function ( response ) {
                         response = $.trim( response );
                         $.ajaxSetup({ cache: false});
-                        $(".responseu#"+id+"ru").html(response);
+                        $("#"+id).children(".rbuttonup").attr("data-original-title",response);
+			 $("#"+id).children('.rbuttonup').tooltip('destroy');
+			 $("#"+id).children('.rbuttonup').tooltip();
+			$("#"+id).children('.rbuttonup').tooltip('show');
                         }
                     }); 
                 return false;
-                });
+                });    
 
 
-    
     });
 
 </script>
 
-
-
-</head>
-<body>
-    <h1>回应</h1>
-    <li id="main-nav-entries"><a href="{% url aiteo_question_list %}">所有话题</a></li>
-    <li id="main-nav-entries"><a href="{% url recommend_article %}">阅读文章</a></li>
-    <form action="." method="POST">
-        {% csrf_token %}
-        {{ question.question }}
-        {{ question.content }}
-        {% load staticfiles %}
-        <span class = "questu" id= {{ question.id}}> {{ question.vote_up_count }} </span> 
-        <a href="#"><img class = "buttonup" id = {{question.id}}  src="{% static "aiteo/images.jpg" %}" alt="up"></a> 
-        <a href="#"><img class = "buttondown" id = {{question.id}}  src="{% static "aiteo/images.jpg" %}" alt="down"></a> 
-        <span class = "questd" id= "{{ question.id}}d"> {{ question.vote_down_count }} </span> 
-        <p> Responses :-</p>
-        {% for response in responses.all %}
-        ({{forloop.counter}}):{{response.user}} 
-        
-        {{ response }} 
-        <span class = "responseu" id= "{{question.id}}_{{response.id}}ru"> {{ response.vote_up_count }} </span> 
-        <a href="#"><img class = "rbuttonup" id = "{{question.id}}_{{response.id}}"  src="{% static "aiteo/images.jpg" %}" alt="up"></a> 
-        <a href="#"><img class = "rbuttondown" id = "{{question.id}}_{{response.id}}"  src="{% static "aiteo/images.jpg" %}" alt="down"></a> 
-        <span class = "responsed" id= "{{question.id}}_{{response.id}}rd"> {{ response.vote_down_count }} </span> 
-        <br>    
-        {% endfor %}
-        <table>
-            {{ add_response_form.as_table }}
-        </table>
-    <p><input type="submit" value="提交"/></p>
-    </form>
-</body>
-</html>
+    {%endblock%}

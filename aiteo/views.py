@@ -90,10 +90,10 @@ def question_detail(request, question_id, **kwargs):
             response.save()
             return HttpResponseRedirect(response.get_absolute_url())
     else:
-        if not is_me or request.user.is_staff:
+        #if not is_me or request.user.is_staff:
             add_response_form = AddResponseForm()
-        else:
-            add_response_form = None
+        #else:
+        #    add_response_form = None
     
     ctx = group_context(group, bridge)
     ctx.update({

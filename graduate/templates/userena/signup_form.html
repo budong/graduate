@@ -2,9 +2,9 @@
 {% load i18n %}
 
 {% block title %}{% trans "Signup" %}{% endblock %}
-
+<div class="container">
 {% block content %}
-<form action="" method="post">
+<form action="" method="post" class="form-signin">
   {% csrf_token %}
   <fieldset>
     <legend>{% trans "Signup" %}</legend>
@@ -24,6 +24,8 @@
     {% endif %}
     {% endfor %}
   </fieldset>
-  <input type="submit" value="{% trans "Signup"%}" />
+<button class="btn btn-middle btn-primary" type="submit">{% trans "Signup"%}</button>
 </form>
 {% endblock %}
+</div>
+

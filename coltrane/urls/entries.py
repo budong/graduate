@@ -20,6 +20,6 @@ urlpatterns = patterns('coltrane.generic.date_based',
 )
 
 urlpatterns += patterns('',
-    url(r'^$',object_list,{'queryset': Entry.live.all()},'coltrane_entry_index'),
+    url(r'^$',object_list,{'queryset': Entry.live.all(),'paginate_by': 8,},'coltrane_entry_index'),
     url(r'^recommend/$',recommend_article,name='recommend_article'),
 )

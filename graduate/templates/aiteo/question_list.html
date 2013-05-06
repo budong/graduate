@@ -1,25 +1,43 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
-<html lang="zh">
-<head>
-    <title>所有话题</title>
-<script type="text/javascript"
-    src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js">
-</script>
+{% extends "common/base.html"%}
+{% block content %}
+
+    <h1>所有话题</h1>
+	<a  href="{% url aiteo_question_create %}" class="btn btn-large btn-primary" type="button">新建</a>
+</hr>  
+ <table class="table table-hover  table-striped">
+    {% for question in questions.all %}
+
+    <tr>
+        <td><a href="question/{{question.id}}">{{ question.question }} <a></td>
+ 	   <td id="{{question.id}}">
+<a class="btn btn-danger buttondown pull-right" href="#" data-toggle="tooltip"  data-original-title="{{ question.vote_down_count }}"><i class="icon-thumbs-down"></i></a>
+ <a class="btn  buttonup pull-right" href="#" data-toggle="tooltip"  data-original-title="{{ question.vote_up_count }}"><i class="icon-thumbs-up"></i></a>
+          </td> </tr>
+    {% endfor %}
+</table>
+
+{%endblock%}
+{% block scripts %}
+<script src=""></script>
 <script type="text/javascript">
     $(document).ready(function() {
-
+	$('.buttonup').tooltip();
+	$('.buttondown').tooltip();
             $('.buttondown').click(function () {
-                var thisobject = $(this);
+                var thisobject = $(this).parent();
                 var id = thisobject.attr("id");
                 var completeurl = "question/vote-question/" + id + "_" + id + "/downvote/";
                 $.ajax({
-                    type: "POST",
+                    type: "GET",
                     url: completeurl,
                     data: "amit",
                     success: function ( response ) {
                         response = $.trim( response );
                         $.ajaxSetup({ cache: false});
-                        $(".questd#"+id+"d").html(response);
+                        $("#"+id).children(".buttondown").attr("data-original-title",response);
+                         $("#"+id).children('.buttondown').tooltip('destroy');
+                         $("#"+id).children('.buttondown').tooltip();
+                        $("#"+id).children('.buttondown').tooltip('show');
                         }
                     }); 
                 return false;
@@ -28,42 +46,24 @@
 
             
             $('.buttonup').click(function () {
-                var thisobject = $(this);
+                var thisobject = $(this).parent();
                 var id = thisobject.attr("id");
                 var completeurl = "question/vote-question/" + id + "_" + id + "/upvote/";
                 $.ajax({
-                    type: "POST",
+                    type: "GET",
                     url: completeurl,
                     data: "amit",
                     success: function ( response ) {
                         response = $.trim( response );
                         $.ajaxSetup({ cache: false});
-                        $(".questu#"+id).html(response);
+                        $("#"+id).children(".buttonup").attr("data-original-title",response);
+			 $("#"+id).children('.buttonup').tooltip('destroy');
+			 $("#"+id).children('.buttonup').tooltip();
+			$("#"+id).children('.buttonup').tooltip('show');
                         }
                     }); 
                 return false;
-                });
-
-    
+                });    
     });
-
 </script>
-
-
-</head>
-<body>
-    <h1>所有话题</h1>
-    <li id="main-nav-entries"><a href="{% url aiteo_question_create %}">新建</a></li>
-    <li id="main-nav-entries"><a href="{% url recommend_article %}">阅读文章</a></li>
-    {% for question in questions.all %}
-    <h4> 
-        <a href="question/{{question.id}}">{{ question.question }} <a>
-            <span class = "questu" id= {{ question.id}}> {{ question.vote_up_count }} </span> 
-            {% load staticfiles %}
-            <a href="#"><img class = "buttonup" id = {{question.id}}  src="{% static "aiteo/images.png" %} " alt="up"></a> 
-            <a href="#"><img class = "buttondown" id = {{question.id}}  src="{% static "aiteo/images.jpg" %}" alt="down"></a> 
-            <span class = "questd" id= "{{ question.id}}d"> {{ question.vote_down_count }} </span> 
-            <br/> </h4>
-    {% endfor %}
-</body>
-</html>
+{%endblock%}

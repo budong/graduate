@@ -1,11 +1,17 @@
+# -*- coding: utf-8 -*-
 # Django settings for graduate project.
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
+import sys
+reload( sys )
+sys.setdefaultencoding('utf-8')
 import os
+
+
 settings_dir = os.path.dirname(__file__)
 PROJECT_ROOT = os.path.abspath(os.path.dirname(settings_dir))
-
+SITE_ROOT=os.path.join(os.path.abspath(os.path.dirname(__file__)),'..')
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
 )
@@ -63,7 +69,7 @@ MEDIA_URL = ''
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/home/media/media.lawrence.com/static/"
-STATIC_ROOT = ''
+STATIC_ROOT = os.path.join(SITE_ROOT,'static')
 
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
@@ -71,6 +77,9 @@ STATIC_URL = '/static/'
 
 # Additional locations of static files
 STATICFILES_DIRS = (
+    ("css", os.path.join(STATIC_ROOT,'css')),
+    ("js", os.path.join(STATIC_ROOT,'js')),
+    ("img", os.path.join(STATIC_ROOT,'img')),
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
@@ -93,11 +102,17 @@ TEMPLATE_LOADERS = (
     'django.template.loaders.app_directories.Loader',
 #     'django.template.loaders.eggs.Loader',
 )
-
+TEMPLATE_CONTEXT_PROCESSORS =  (
+'django.core.context_processors.debug',  
+    'django.core.context_processors.i18n',  
+    'django.core.context_processors.media',  
+    'django.core.context_processors.static',  
+    'django.contrib.auth.context_processors.auth',
+)
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    #'django.middleware.csrf.CsrfViewMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     # Uncomment the next line for simple clickjacking protection:
@@ -191,13 +206,21 @@ LOGIN_URL = '/accounts/signin/'
 LOGOUT_URL = '/accounts/signout/'  
 
 
+'''
 EMAIL_USE_TLS = True  
 EMAIL_HOST = 'smtp.gmail.com'  
 EMAIL_PORT = 587  
 EMAIL_HOST_USER = 'yourgmailaccount@gmail.com'  
 EMAIL_HOST_PASSWORD = 'yourgmailpassword' 
+'''
+
+EMAIL_HOST = 'smtp.exmail.qq.com'
+EMAIL_PORT = '25'
+EMAIL_HOST_USER = 'admin@peiqiang.net' 
+EMAIL_HOST_PASSWORD = 'lipeiqiang38145'
+DEFAULT_FROM_EMAIL = u'学习 <admin@peiqiang.net>'
 
 #django search
 HAYSTACK_SITECONF = 'graduate.search_sites'
 HAYSTACK_SEARCH_ENGINE = 'whoosh' 
-HAYSTACK_WHOOSH_PATH = '/home/whoosh/mysite_index'
+HAYSTACK_WHOOSH_PATH = os.path.join(PROJECT_ROOT, 'whoosh')

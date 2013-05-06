@@ -1,8 +1,13 @@
+# -*- coding: utf-8 -*-
 import datetime
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.db import models
 from markdown import markdown
+
+import sys
+reload( sys )
+sys.setdefaultencoding('utf-8')
 
 class Category(models.Model):
     title = models.CharField(max_length=250, help_text='Maximum 250 characters.')
@@ -41,24 +46,24 @@ class Entry(models.Model):
     )
     
     # Core fields.
-    title = models.CharField(max_length=250)
-    excerpt = models.TextField(blank=True)
-    body = models.TextField()
-    pub_date = models.DateTimeField(default=datetime.datetime.now)
+    title = models.CharField(max_length=250,verbose_name="标题")
+    excerpt = models.TextField(blank=True,verbose_name="简介")
+    body = models.TextField(verbose_name="内容")
+    pub_date = models.DateTimeField(default=datetime.datetime.now,verbose_name="发布日期")
 
     # Fields to store generated HTML.
     excerpt_html = models.TextField(editable=False, blank=True)
     body_html = models.TextField(editable=False, blank=True)
 
     # Metadata.
-    author = models.ForeignKey(User)
-    enable_comments = models.BooleanField(default=True)
-    featured = models.BooleanField(default=False)
+    author = models.ForeignKey(User,verbose_name="用户")
+    enable_comments = models.BooleanField(default=True,verbose_name="允许评论")
+    featured = models.BooleanField(default=False,verbose_name="特色")
     slug = models.SlugField(unique_for_date='pub_date')
-    status = models.IntegerField(choices=STATUS_CHOICES, default=LIVE_STATUS)
+    status = models.IntegerField(choices=STATUS_CHOICES, default=LIVE_STATUS,verbose_name="状态")
 
     # Categorization.
-    categories = models.ForeignKey(Category,verbose_name="this is a test")
+    categories = models.ForeignKey(Category,verbose_name="标签")
     
     # Need to be this way around so that non-live entries will show up in Admin, which uses the default (first) manager.
     objects = models.Manager()

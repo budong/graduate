@@ -1,0 +1,108 @@
+﻿<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>{% block title %}{% endblock %}</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="description" content="">
+		<meta name="author" content="">
+
+		<!---style--->
+		<link href="{{STATIC_URL}}css/bootstrap.css" rel="stylesheet" />
+		<style type="text/css">
+			body {
+				padding-top: 60px;
+				padding-bottom: 40px;
+			}
+		</style>
+
+		<link href="{{STATIC_URL}}css/bootstrap-responsive.css" ref="stylesheet">
+
+	</head>
+
+	<body class="{% block bodyclass %}{% endblock %}">
+
+		<div class="navbar navbar-inverse navbar-fixed-top">
+		<div class="navbar-inner">
+			<div class="container">
+
+				<a class="brand" href="/article/entries/recommend/">NESSS</a>
+				<div class="nav-collapse collapse">
+					<ul class="nav">
+						<li class="active"><a href="/article/entries/recommend/">推荐</a></li>
+						<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">阅读 <b class="caret"></b></a>
+						<ul class="dropdown-menu">
+							<li><a href="{% url coltrane_entry_archive_index %}">最新</a></li>
+							<li><a href="{% url coltrane_entry_index %}">所有</a></li>
+						</ul>
+						</li>
+						<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">标签<b class="caret"></b></a>
+						<ul class="dropdown-menu">
+							<li><a href="/article/categories/network/">网络</a></li>
+							<li><a href="/article/categories/system/">系统</a></li>
+							<li><a href="/article/categories/database/">数据库</a></li>
+							<li><a href="/article/categories/other/">其他分类</a></li>
+						</ul>
+						</li>
+						<li><a href="/search"><span>搜索</span></a></li>
+						<li><a href="/exam_test/checkout/"><span>测试</span></a></li>
+						<li><a href="/forum"><span>话题</span></a></li>
+					</ul>
+					<ul class="nav pull-right">
+						<li class="active dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">欢迎你， {{ user.username }} <b class="caret"></b></a>
+						<ul class="dropdown-menu">
+					 	<li><a href="accounts/{{user.username }}"><span>个人中心</span></a></li>
+						<li><a href="{% url userena_signout %}"><span>退出</span></a></li>	
+						</ul>
+						</li>
+						<li><a class="btn btn-small" role="button" href="#signin_modal" data-toggle="modal"><span>签到</span></a></li>
+					</ul>
+
+				</div><!--/.nav-collapse -->
+			</div>
+		</div>
+	</div>
+<div id="signin_modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+{% if error %}
+<p style="color: red;">说点什么.</p>
+{% endif %}
+<form action="/sign/" method="get" class="form-inline">
+<legend>童鞋，说点什么吧～</legend>
+<div class="input-prepend">
+<input  class="span2" id="appendedInput" type="text" name="mood">
+<button class="btn" type="submit">签到</button>
+</div>
+</form>
+<p>{{ sign }}</p>
+
+</div>
+	<div class="container">
+	 <div class="row-fluid">
+    <div class="span10">
+		<div id="content">
+			{% block content %}
+			{% endblock %}
+		</div>
+</div>
+<div class="span2">
+		<div id="sidebar">
+			{% block slidebar %}
+			{% endblock %}
+		</div>
+</div><!--/.span2-->
+</div><!--/.row-fluid---->
+
+<hr>
+<footer>
+        <p>© 2013</p>
+      </footer>
+	</div>
+<!------script------>
+<script src="{{STATIC_URL}}js/jquery1.9.js" ></script>
+<script src="{{STATIC_URL}}js/bootstrap.js"></script
+{% block scripts %}
+{% endblock %}
+</body>
+</html>
