@@ -11,16 +11,11 @@
 </form>   
 <hr />
 <h2>站内搜索</h2>
-<form method="get" action=".">
-  <table>
-  {{ form.as_table }}
-  <tr>
-      <td>&nbsp;</td>
-      <td><input type="submit" class="btn" value="Search"></td>
-    </tr>
-  </table>
-<hr />
+<form method="get" action="." class="form-horizontal">
+  {{ form.q }}
+     <input type="submit" class="btn" value="Search">
 {% if query %}
+<hr />
 <h3>搜索结果</h3>
 {% for result in page.object_list %}
 <p><a href="{{ result.object.get_absolute_url }}">{{ result.object.title }}</a></p>

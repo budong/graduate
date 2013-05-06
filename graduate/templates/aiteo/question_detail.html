@@ -110,7 +110,7 @@
             $('.rbuttonup').click(function () {
                 var thisobject = $(this).parent();
                 var id = thisobject.attr("id");
-                var completeurl = "../vote-response/" + id + "/downvote/";
+                var completeurl = "../vote-response/" + id + "/upvote/";
                 $.ajax({
                     type: "GET",
                     url: completeurl,
