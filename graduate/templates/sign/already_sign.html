@@ -1,8 +1,13 @@
-<html>
-<body>
+{% extends "common/base.html" %}
+  
+     {% block title %}提醒{% endblock %}
+
+{% block content %}
+
+
 <p>你好，你已经签到过了。</p>
 <a href="/sign/list">历史签到</a></li>
 <a href="/article/entries/">回到首页</a></li>
-</body>
-</html>
+
+{% endblock  %}
 

@@ -1,4 +1,4 @@
-{% extends 'userena/base_userena.html' %}
+{% extends 'userena/base_userena_sign.html' %}
 {% load i18n %}
 
 {% block title %}{% trans "Signup" %}{% endblock %}
@@ -24,7 +24,9 @@
     {% endif %}
     {% endfor %}
   </fieldset>
-<button class="btn btn-middle btn-primary" type="submit">{% trans "Signup"%}</button>
+  
+  <button class="btn btn-large btn-success" type="submit">{% trans "Signup"%}</button>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="btn  btn-large" href="/accounts/signin">登录</a>
 </form>
 {% endblock %}
 </div>

@@ -1,17 +1,21 @@
-<html>
-<body>
-<h2>签到记录</h2>
-
+ {% extends "common/base.html" %}
+  
+        {% block title %}签到记录{% endblock %}
+           
+   {% block content %}
+   <table class="table table-striped table-hover table-bordered">
     {% if object_list %}
-        <ul>
-        {% for sign in object_list %}
-            <li><a href="{{ sign.get_absolute_url }}">{{ sign.mood }}</a></li>
+    {% for sign in object_list %}
+    <tr>
+        <td>
+        {{forloop.counter}} | 
+       <a href="{{ sign.get_absolute_url }}">{{ sign.mood }}</a></td>
+    </tr>
         {% endfor %}
-        </ul>
     {% else %}
-        <p>没有签到记录</p>
+    <tr><td>没有签到记录</td></tr>
     {% endif %}
-
+</table>
     <p>
     {% if page_obj.has_previous %}
         <a href="?page={{ page_obj.previous_page_number }}">上一页</a>
@@ -21,6 +25,7 @@
         <a href="?page={{ page_obj.next_page_number }}">下一页</a>
     {% endif %}
     </p>
-</p><li><a href="{% url recommend_article %}"><span>继续阅读</span></a><li><p>
-</body>
-</html>
+    </p><a class="btn btn-middle btn-success" href="{% url recommend_article %}"><span>回到首页</span></a></p>
+
+
+    {% endblock %}

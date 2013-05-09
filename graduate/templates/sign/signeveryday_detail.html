@@ -1,7 +1,9 @@
-<html>
-<body>
+{% extends "common/base.html" %}
+ {% block title %}签到记录{% endblock %}
+ {% block content %}
 <h2>{{ object.user }}</h2>
-<h2>{{ object.pub_date }}</h2>
-<h2>{{ object.mood }}</h2>
+<span class="pull-right">{{ object.pub_date }}</span>
+<p>{{ object.mood }}</p>
 </body>
 </html>
+{% endblock %}

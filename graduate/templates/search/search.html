@@ -3,17 +3,17 @@
 {% block title %}Search{% endblock %}
 
 {% block content %}
-<h2>Google Search</h2>
+<h2>谷歌搜索</h2>
 <form action="http://www.google.com/search" method="get" class="form-search">    
     <input name="ie" value="UTF-8" type="hidden" />    
     <input  name="q" class="input-large"  type="text"/>    
-    <input name="Search" value="Search" class="btn" type="submit" />    
+    <input name="Search" value="搜索" class="btn" type="submit" />    
 </form>   
 <hr />
 <h2>站内搜索</h2>
 <form method="get" action="." class="form-horizontal">
   {{ form.q }}
-     <input type="submit" class="btn" value="Search">
+     <input type="submit" class="btn" value="搜索">
 {% if query %}
 <hr />
 <h3>搜索结果</h3>

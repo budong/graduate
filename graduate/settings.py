@@ -103,7 +103,7 @@ TEMPLATE_LOADERS = (
 #     'django.template.loaders.eggs.Loader',
 )
 TEMPLATE_CONTEXT_PROCESSORS =  (
-'django.core.context_processors.debug',  
+    'django.core.context_processors.debug',  
     'django.core.context_processors.i18n',  
     'django.core.context_processors.media',  
     'django.core.context_processors.static',  
@@ -217,7 +217,7 @@ EMAIL_HOST_PASSWORD = 'yourgmailpassword'
 EMAIL_HOST = 'smtp.exmail.qq.com'
 EMAIL_PORT = '25'
 EMAIL_HOST_USER = 'admin@peiqiang.net' 
-EMAIL_HOST_PASSWORD = 'lipeiqiang'
+EMAIL_HOST_PASSWORD = 'lipeiqiang38145'
 DEFAULT_FROM_EMAIL = u'学习 <admin@peiqiang.net>'
 
 #django search

@@ -1,18 +1,21 @@
-<html>
-<body>
+{% extends "common/base.html"%}
+
+{% block title%}
+历史记录{% endblock %}
+{% block content %}
+
 <h2>历史记录</h2>
 
     {% if object_list %}
-        <ul>
+        <table class="table table-bordered table-hover">
         {% for userexam in object_list %}
-            <p>{{ forloop.counter }}: </p>
-            <li>{{ userexam.pub_date }} {{ userexam.rate }}</li>
+        <tr><td>{{ forloop.counter }} |
+               时间：{{ userexam.pub_date|date:"Y-m-d" }} 分数：{{ userexam.rate }}</td><tr>
         {% endfor %}
-        </ul>
+        </table>
     {% else %}
         <p>暂无问题</p>
     {% endif %}
-
     <p>
     {% if page_obj.has_previous %}
         <a href="?page={{ page_obj.previous_page_number }}">上一页</a>
@@ -22,6 +25,5 @@
         <a href="?page={{ page_obj.next_page_number }}">下一页</a>
     {% endif %}
     </p>
-</p><li><a href="{% url recommend_article %}"><span>继续阅读</span></a><li><p>
-</body>
-</html>
+    </p><a class="btn btn-large btn-success" href="{% url recommend_article %}"><span>回到首页</span></a></p>
+    {% endblock %}

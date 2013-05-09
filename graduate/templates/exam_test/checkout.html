@@ -2,14 +2,12 @@
 {% block content%}
 <form name="input" action="" method="get">
 {% if sucess %}
-<li><a href="/exam_test/checkout"><span>重新开始</span></a></li>
-<li><a href="{% url recommend_article %}"><span>继续阅读</span></a></li>
-<li><a href="{% url user_rate_list %}"><span>查看测试记录</span></a></li>
-<h2>得分{{ rate }}<h2/>
-<br />
+<h2>得分:{{ rate }} 分 </h2>
+        <table class="table table-bordered">
+            <tr><td>
 问题1：
 {{ all_questions.0.question }}
-<br />
+
 A:
 {{ all_questions.0.answer_a }}
 <br />
@@ -26,9 +24,11 @@ D:
 {{ all_questions.0.answer }}
 <br />
 正确答案：
-{{ all_questions.0.answer_is_right }}
-<br />
-<br />
+<span class="badge badge-success">
+    {{ all_questions.0.answer_is_right }}
+</span>
+
+</td></tr><tr><td>
 问题2：
 {{ all_questions.1.question }}
 <br />
@@ -48,11 +48,13 @@ D:
 {{ all_questions.1.answer }}
 <br />
 正确答案：
-{{ all_questions.1.answer_is_right }}
+<span class="badge badge-success">
+    {{ all_questions.1.answer_is_right }}
+    <span>
 <br />
 
-
-<br />
+</td></tr>
+<tr><td>
 问题3：
 {{ all_questions.2.question }}
 <br />
@@ -72,11 +74,12 @@ D:
 {{ all_questions.2.answer }}
 <br />
 正确答案：
-{{ all_questions.2.answer_is_right }}
-<br />
 
-
-<br />
+<span class="badge badge-success">
+    {{ all_questions.2.answer_is_right }}
+    <span>
+</td></tr>
+<tr><td>
 问题4：
 {{ all_questions.3.question }}
 <br />
@@ -96,12 +99,13 @@ D:
 {{ all_questions.3.answer }}
 <br />
 正确答案：
-{{ all_questions.3.answer_is_right }}
+<span class="badge badge-success">
+    {{ all_questions.3.answer_is_right }}
+    <span>
 <br />
-
-
-<br />
-问题5：
+</td></tr>
+<tr><td>
+        问题5：
 {{ all_questions.4.question }}
 <br />
 A:
@@ -120,12 +124,16 @@ D:
 {{ all_questions.4.answer }}
 <br />
 正确答案：
-{{ all_questions.4.answer_is_right }}
+<span class="badge badge-success">
+    {{ all_questions.4.answer_is_right }}
+    <span>
 <br />
-
-
+</td></tr>
+</table>
+<a class="btn" href="/exam_test/checkout"><span>重新开始</span></a>
+ <a class="btn btn-success"href="{% url recommend_article %}"><span>返回首页</span></a>
+ <a class="btn btn-primary"href="{% url user_rate_list %}"><span>查看测试记录</span></a>
 {% else %} 
-<div class="row">
 <h3>{{ num_question }}:{{ question }}</h3>
 <table class="table table-hover">
 <tr>
@@ -162,8 +170,8 @@ D:
 </td>
 </tr>
 </table>
-<input type="submit" value="提交" />
-</div><!---/.row--->
+<input class="btn btn-primary" type="submit" value="提交" />
+<!---/.row--->
 </form>
 {% comment %}
 {% if error %}
@@ -173,7 +181,6 @@ D:
 <br/>
 {% endif %}
 {% endcomment %}
-你好：{{ username }}
 {% endif %}
 {%endblock %}
 
