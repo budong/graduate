@@ -217,7 +217,7 @@ EMAIL_HOST_PASSWORD = 'yourgmailpassword'
 EMAIL_HOST = 'smtp.exmail.qq.com'
 EMAIL_PORT = '25'
 EMAIL_HOST_USER = 'admin@peiqiang.net' 
-EMAIL_HOST_PASSWORD = 'lipeiqiang38145'
+EMAIL_HOST_PASSWORD = 'test'
 DEFAULT_FROM_EMAIL = u'学习 <admin@peiqiang.net>'
 
 #django search

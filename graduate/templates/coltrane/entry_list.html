@@ -4,8 +4,8 @@
     <h2>文章</h2>
     
     {% if object_list %}
-        <ul>
-        {% for entry in object_list %}
+    {% for entry in object_list %}
+    <div>
       <h2>{{ entry.title }}</h2>
       <p>发表于 {{ entry.pub_date|date:"F j, Y" }}</p>
       {% if entry.excerpt_html %}
@@ -17,8 +17,9 @@
             {% comment %}
             <li><a href="{{ entry.get_absolute_url }}">{{ entry.title }}</a></li>
              {% endcomment %}
-        {% endfor %}
-        </ul>
+         </div>
+         <hr />
+             {% endfor %}
     {% else %}
         <p>没有推荐文章</p>
     {% endif %}

@@ -29,7 +29,8 @@
 &nbsp;&nbsp;&nbsp;
 <button class="btn btn-large" type="submit">{% trans "Signin" %}</button>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="btn btn-success btn-large" href="{% url 'userena_signup' %}">注册</a>
-  <p class="forgot-password"><a href="{% url 'userena_password_reset' %}" title="{% trans 'Forgot your password?' %}">{% trans "Forgot your password?" %}</a></p>
+<p></p>
+<p class="forgot-password"><a href="{% url 'userena_password_reset' %}" title="{% trans 'Forgot your password?' %}">{% trans "Forgot your password?" %}</a></p>
   {% if next %}<input type="hidden" name="next" value="{{ next }}" />{% endif %}
 </form>
 {% endblock %}
